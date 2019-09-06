@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using SWAPI.Library;
+using SWAPI.Library.Settings;
 
 namespace SWAPI.UI
 {
@@ -8,7 +9,7 @@ namespace SWAPI.UI
     {
         static async Task Main(string[] args)
         {
-            var requestManager = new RequestManager();
+            var requestManager = new RequestManager(new SettingsManager());
 
             var result = await requestManager.MakeRequest();
 

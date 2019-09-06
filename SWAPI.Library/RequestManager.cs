@@ -1,20 +1,31 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using SWAPI.Library.Settings;
 
 namespace SWAPI.Library
 {
     public class RequestManager
     {
-        public async Task<string> MakeRequest()
+        private ISettingsManager _settingsManager;
+        private HttpClient _httpClient;
+
+        public RequestManager(ISettingsManager settingsManager)
         {
-            var httpClient = new HttpClient();
+            _settingsManager = settingsManager;
+            _httpClient = CreateHttpClient();
+        }
 
-            httpClient.BaseAddress = new Uri("https://swapi.co/api/");
+        public Task<string> MakeRequest()
+        {
+            return _httpClient.GetStringAsync("planets/1");
+        }
 
-            var response = await httpClient.GetAsync("planets/1");
+        private HttpClient CreateHttpClient()
+        {
+            var baseUrl = _settingsManager.GetItemAsString("baseUrl");
 
-            return await response.Content.ReadAsStringAsync();
+            return new HttpClient { BaseAddress = new Uri(baseUrl) };
         }
     }
 }
