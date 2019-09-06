@@ -19,7 +19,7 @@ namespace SWAPI.Library.Requests
 
         public Task<string> GetById(Resource resource, int id)
         {
-            var url = $"{resource.ToString().ToLower()}/{id}";
+            var url = $"{resource.GetName()}/{id}";
 
             return Get(url);
         }
