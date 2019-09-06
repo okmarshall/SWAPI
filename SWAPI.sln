@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWAPI.UI", "SWAPI.Console\SWAPI.UI.csproj", "{BA11EB80-43F9-4B1B-AD57-B9AAA16878AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWAPI.Library", "SWAPI.Library\SWAPI.Library.csproj", "{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +15,9 @@ Global
 		{BA11EB80-43F9-4B1B-AD57-B9AAA16878AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA11EB80-43F9-4B1B-AD57-B9AAA16878AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA11EB80-43F9-4B1B-AD57-B9AAA16878AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
