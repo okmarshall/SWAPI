@@ -2,13 +2,14 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using SWAPI.Library.Settings;
+using SWAPI.Library.Enums;
 
-namespace SWAPI.Library
+namespace SWAPI.Library.Requests
 {
-    public class RequestManager
+    public class RequestManager : IRequestManager
     {
-        private ISettingsManager _settingsManager;
-        private HttpClient _httpClient;
+        private readonly ISettingsManager _settingsManager;
+        private readonly HttpClient _httpClient;
 
         public RequestManager(ISettingsManager settingsManager)
         {
@@ -16,9 +17,16 @@ namespace SWAPI.Library
             _httpClient = CreateHttpClient();
         }
 
-        public Task<string> MakeRequest()
+        public Task<string> GetById(Resource resource, int id)
         {
-            return _httpClient.GetStringAsync("people/1");
+            var url = $"{resource.ToString().ToLower()}/{id}";
+
+            return Get(url);
+        }
+
+        private Task<string> Get(string requestUrl)
+        {
+            return _httpClient.GetStringAsync(requestUrl);
         }
 
         private HttpClient CreateHttpClient()

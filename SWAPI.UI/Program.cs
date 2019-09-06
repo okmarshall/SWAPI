@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
-using SWAPI.Library;
-using SWAPI.Library.Models;
-using SWAPI.Library.Settings;
 using Newtonsoft.Json;
+using SWAPI.Library.Enums;
+using SWAPI.Library.Models;
+using SWAPI.Library.Requests;
+using SWAPI.Library.Settings;
 
 namespace SWAPI.UI
 {
@@ -13,7 +14,7 @@ namespace SWAPI.UI
         {
             var requestManager = new RequestManager(new SettingsManager());
 
-            var result = await requestManager.MakeRequest();
+            var result = await requestManager.GetById(Resource.People, 1);
 
             var person = JsonConvert.DeserializeObject<Person>(result);
 
