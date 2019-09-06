@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using SWAPI.Library;
+using SWAPI.Library.Models;
 using SWAPI.Library.Settings;
+using Newtonsoft.Json;
 
 namespace SWAPI.UI
 {
@@ -13,7 +15,9 @@ namespace SWAPI.UI
 
             var result = await requestManager.MakeRequest();
 
-            Console.WriteLine(result);
+            var person = JsonConvert.DeserializeObject<Person>(result);
+
+            Console.WriteLine($"Name: {person.Name}, Vehicles: {string.Join(",", person.Vehicles)}");
         }
     }
 }

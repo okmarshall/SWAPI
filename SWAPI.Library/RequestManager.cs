@@ -18,7 +18,7 @@ namespace SWAPI.Library
 
         public Task<string> MakeRequest()
         {
-            return _httpClient.GetStringAsync("planets/1");
+            return _httpClient.GetStringAsync("people/1");
         }
 
         private HttpClient CreateHttpClient()
