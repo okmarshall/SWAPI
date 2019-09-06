@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWAPI.UI", "SWAPI.UI\SWAPI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWAPI.Library", "SWAPI.Library\SWAPI.Library.csproj", "{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SWAPI.Tests", "SWAPI.Tests\SWAPI.Tests.csproj", "{AFF48881-04BA-40C1-9D3C-914680C7FD78}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,5 +21,9 @@ Global
 		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D7812B1-82D1-4D95-B8A0-B30D78FD5212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF48881-04BA-40C1-9D3C-914680C7FD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF48881-04BA-40C1-9D3C-914680C7FD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF48881-04BA-40C1-9D3C-914680C7FD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF48881-04BA-40C1-9D3C-914680C7FD78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
