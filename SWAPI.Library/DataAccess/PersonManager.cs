@@ -19,18 +19,25 @@ namespace SWAPI.Library.DataAccess
 
         public Task<int> SaveMany(List<Person> people)
         {
-            using (var db = new SWAPIContext(DataSource))
+            using (var dbContext = new SWAPIContext(DataSource))
             {
-                db.People.AddRange(people);
-                return db.SaveChangesAsync();
+                foreach (var person in people)
+                {
+                    if(!dbContext.People.Any(p => p.Name == person.Name))
+                    {
+                        dbContext.People.Add(person);
+                    }
+                }
+
+                return dbContext.SaveChangesAsync();
             }
         }
 
         public List<Person> GetAll()
         {
-            using(var db = new SWAPIContext(DataSource))
+            using(var dbContext = new SWAPIContext(DataSource))
             {
-                return db.People.ToList();
+                return dbContext.People.ToList();
             }
         }
     }
