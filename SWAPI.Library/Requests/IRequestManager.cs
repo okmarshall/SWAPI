@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
 using SWAPI.Library.Enums;
+using SWAPI.Library.Models;
 
 namespace SWAPI.Library.Requests
 {
     public interface IRequestManager
     {
-        Task<string> GetById(Resource resource, int id);
+        Task<T> GetById<T>(Resource resource, int id) where T : BaseModel;
     }
 }

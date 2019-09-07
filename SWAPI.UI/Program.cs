@@ -12,15 +12,16 @@ namespace SWAPI.UI
     {
         static async Task Main(string[] args)
         {
-            var requestManager = new RequestManager(new SettingsManager());
+            var requestManager = new RequestManager(new RequestClient(new SettingsManager()));
 
-            //var result = await requestManager.GetById(Resource.People, 1);
+            //var person = await requestManager.GetById<Person>(Resource.People, 1);
 
-            //var person = JsonConvert.DeserializeObject<Person>(result);
+            var people = await requestManager.GetAll<Person>(Resource.People);
 
-            //Console.WriteLine($"Name: {person.Name}, Vehicles: {string.Join(",", person.Vehicles)}");
-
-            await requestManager.GetAll(Resource.People);
+            foreach (var person in people)
+            {
+                Console.WriteLine(person.Name);
+            }
         }
     }
 }

@@ -1,71 +1,54 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using SWAPI.Library.Settings;
+using Newtonsoft.Json;
 using SWAPI.Library.Enums;
 using SWAPI.Library.Models;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-
-using System.Linq;
 
 namespace SWAPI.Library.Requests
 {
     public class RequestManager : IRequestManager
     {
-        private readonly ISettingsManager _settingsManager;
+        private readonly IRequestClient _client;
 
-        private readonly HttpClient _httpClient;
-
-        public RequestManager(ISettingsManager settingsManager)
+        public RequestManager(IRequestClient requestClient)
         {
-            _settingsManager = settingsManager;
-            
-            _httpClient = CreateHttpClient();
+            _client = requestClient;
         }
 
-        public Task<string> GetById(Resource resource, int id)
+        public async Task<T> GetById<T>(Resource resource, int id) where T : BaseModel
         {
             var url = $"{resource.GetName()}/{id}";
 
-            return Get(url);
+            var result = await _client.GetAsync(url);
+
+            return JsonConvert.DeserializeObject<T>(result);
         }
 
-        public async Task GetAll(Resource resource)
+        public async Task<List<T>> GetAll<T>(Resource resource) where T : BaseModel
         {
             var url = $"{resource.GetName()}";
 
-            var people = new List<Person>();
+            var results = new List<T>();
 
             var next = string.Empty;
 
             while (next != null)
             {
-                var result = await Get(url);
+                var result = await _client.GetAsync(url);
 
-                var resultPage = JsonConvert.DeserializeObject<ResultPage<Person>>(result);
+                var resultPage = JsonConvert.DeserializeObject<ResultPage<T>>(result);
 
                 foreach (var person in resultPage.Results)
                 {
-                    people.Add(person);
+                    results.Add(person);
                 }
 
                 next = resultPage.Next;
 
                 url = next;
             }
-        }
 
-        private Task<string> Get(string requestUrl)
-        {
-            return _httpClient.GetStringAsync(requestUrl);
-        }
-
-        private HttpClient CreateHttpClient()
-        {
-            var baseUrl = _settingsManager.GetItemAsString("baseUrl");
-
-            return new HttpClient { BaseAddress = new Uri(baseUrl) };
+            return results;
         }
     }
 }
