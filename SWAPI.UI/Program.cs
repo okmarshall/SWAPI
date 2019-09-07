@@ -5,6 +5,7 @@ using SWAPI.Library.Requests;
 using SWAPI.Library.Settings;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace SWAPI.UI
 {
@@ -42,19 +43,17 @@ namespace SWAPI.UI
             catch (Exception)
             {
                 Console.WriteLine("Something went wrong. Exiting...");
-            }           
+            }
         }
 
         public static void RegisterServices()
         {
-            var serviceCollection = new ServiceCollection();
-
-            serviceCollection.AddTransient<IRequestManager, RequestManager>();
-            serviceCollection.AddTransient<IRequestClient, RequestClient>();
-            serviceCollection.AddSingleton<ISettingsManager, SettingsManager>();
-            serviceCollection.AddSingleton<IPersonManager, PersonManager>();
-
-            _serviceProvider = serviceCollection.BuildServiceProvider();
+            _serviceProvider = new ServiceCollection()
+                .AddTransient<IRequestManager, RequestManager>()
+                .AddSingleton<IRequestClient, RequestClient>()
+                .AddSingleton<ISettingsManager, SettingsManager>()
+                .AddSingleton<IPersonManager, PersonManager>()               
+                .BuildServiceProvider();
         }
     }
 }

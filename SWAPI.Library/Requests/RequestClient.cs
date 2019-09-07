@@ -38,7 +38,7 @@ namespace SWAPI.Library.Requests
         {
             var baseUrl = _settingsManager.GetItemAsString("baseUrl");
 
-            return new HttpClient { BaseAddress = new Uri(baseUrl) };
+            return new HttpClient { BaseAddress = new Uri(baseUrl), Timeout = TimeSpan.FromSeconds(10) };
         }
     }
 }
