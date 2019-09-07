@@ -4,16 +4,21 @@ using SWAPI.Library.Models;
 using SWAPI.Library.Requests;
 using SWAPI.Library.Settings;
 using System;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SWAPI.UI
 {
     class Program
     {
+        private static IServiceProvider _serviceProvider;
+
         static async Task Main(string[] args)
         {
             try
             {
-                var requestManager = new RequestManager(new RequestClient(new SettingsManager()));
+                RegisterServices();
+
+                var requestManager = _serviceProvider.GetService<IRequestManager>();
 
                 Console.WriteLine("Retrieving all people...");
 
@@ -21,13 +26,13 @@ namespace SWAPI.UI
 
                 if (people?.Count > 0)
                 {
-                    var personManager = new PersonManager(new SettingsManager());
+                    var personManager = _serviceProvider.GetService<IPersonManager>();
 
-                    Console.WriteLine($"Persisting { people.Count } people...");
+                    Console.WriteLine($"Found { people.Count } people...");
 
                     var count = await personManager.SaveMany(people);
 
-                    Console.WriteLine($"Retrieved and persisted { count} people...");
+                    Console.WriteLine($"Persisted { count } people...");
                 }
                 else
                 {
@@ -38,6 +43,18 @@ namespace SWAPI.UI
             {
                 Console.WriteLine("Something went wrong. Exiting...");
             }           
+        }
+
+        public static void RegisterServices()
+        {
+            var serviceCollection = new ServiceCollection();
+
+            serviceCollection.AddTransient<IRequestManager, RequestManager>();
+            serviceCollection.AddTransient<IRequestClient, RequestClient>();
+            serviceCollection.AddSingleton<ISettingsManager, SettingsManager>();
+            serviceCollection.AddSingleton<IPersonManager, PersonManager>();
+
+            _serviceProvider = serviceCollection.BuildServiceProvider();
         }
     }
 }

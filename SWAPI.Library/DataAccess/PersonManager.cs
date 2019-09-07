@@ -6,7 +6,7 @@ using SWAPI.Library.Settings;
 
 namespace SWAPI.Library.DataAccess
 {
-    public class PersonManager
+    public class PersonManager : IPersonManager
     {
         private ISettingsManager _settingsManager;
 
