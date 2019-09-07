@@ -14,11 +14,13 @@ namespace SWAPI.UI
         {
             var requestManager = new RequestManager(new SettingsManager());
 
-            var result = await requestManager.GetById(Resource.People, 1);
+            //var result = await requestManager.GetById(Resource.People, 1);
 
-            var person = JsonConvert.DeserializeObject<Person>(result);
+            //var person = JsonConvert.DeserializeObject<Person>(result);
 
-            Console.WriteLine($"Name: {person.Name}, Vehicles: {string.Join(",", person.Vehicles)}");
+            //Console.WriteLine($"Name: {person.Name}, Vehicles: {string.Join(",", person.Vehicles)}");
+
+            await requestManager.GetAll(Resource.People);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace SWAPI.Library.Models
 {
-    public class Person
+    public class Person : BaseModel
     {
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -42,14 +42,5 @@ namespace SWAPI.Library.Models
 
         [JsonProperty("vehicles")]
         public string[] Vehicles { get; set; }
-
-        [JsonProperty("url")]
-        public string Url { get; set; }
-
-        [JsonProperty("created")]
-        public string Created { get; set; }
-
-        [JsonProperty("edited")]
-        public string Edited { get; set; }
     }
 }
