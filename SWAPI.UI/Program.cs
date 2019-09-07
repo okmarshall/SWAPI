@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using SWAPI.Library.DataAccess;
 using SWAPI.Library.Models;
 using SWAPI.Library.Requests;
 using SWAPI.Library.Settings;
+using System;
 
 namespace SWAPI.UI
 {
@@ -12,23 +11,33 @@ namespace SWAPI.UI
     {
         static async Task Main(string[] args)
         {
-            //var requestManager = new RequestManager(new RequestClient(new SettingsManager()));
+            try
+            {
+                var requestManager = new RequestManager(new RequestClient(new SettingsManager()));
 
+                Console.WriteLine("Retrieving all people...");
 
-            //var people = await requestManager.GetAll<Person>("people");
+                var people = await requestManager.GetAll<Person>("people");
 
-            //var personManager = new PersonManager();
+                if (people?.Count > 0)
+                {
+                    var personManager = new PersonManager(new SettingsManager());
 
-            //personManager.SaveMany(people);
+                    Console.WriteLine($"Persisting { people.Count } people...");
 
-            //foreach (var person in personManager.GetAll())
-            //{
-            //    Console.WriteLine(person.Name);
-            //}
+                    var count = await personManager.SaveMany(people);
 
-            var person = new PersonManager(new SettingsManager()).GetAll().First();
-
-            Console.WriteLine(person.Name);
+                    Console.WriteLine($"Retrieved and persisted { count} people...");
+                }
+                else
+                {
+                    Console.WriteLine("No people found...");
+                }
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Something went wrong. Exiting...");
+            }           
         }
     }
 }

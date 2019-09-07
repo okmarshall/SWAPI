@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using SWAPI.Library.Models;
 using SWAPI.Library.Settings;
 
@@ -16,12 +17,12 @@ namespace SWAPI.Library.DataAccess
             _settingsManager = settingsManager;
         }
 
-        public void SaveMany(List<Person> people)
+        public Task<int> SaveMany(List<Person> people)
         {
             using (var db = new SWAPIContext(DataSource))
             {
                 db.People.AddRange(people);
-                db.SaveChanges();
+                return db.SaveChangesAsync();
             }
         }
 
