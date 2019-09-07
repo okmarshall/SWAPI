@@ -2,7 +2,7 @@
 
 namespace SWAPI.Library.Models
 {
-    public class BaseModel
+    public abstract class BaseModel
     {
         [JsonProperty("url")]
         public string Url { get; set; }

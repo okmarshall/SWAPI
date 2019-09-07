@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using SWAPI.Library.Enums;
+using SWAPI.Library.DataAccess;
 using SWAPI.Library.Models;
 using SWAPI.Library.Requests;
 using SWAPI.Library.Settings;
@@ -12,16 +12,23 @@ namespace SWAPI.UI
     {
         static async Task Main(string[] args)
         {
-            var requestManager = new RequestManager(new RequestClient(new SettingsManager()));
+            //var requestManager = new RequestManager(new RequestClient(new SettingsManager()));
 
-            //var person = await requestManager.GetById<Person>(Resource.People, 1);
 
-            var people = await requestManager.GetAll<Person>(Resource.People);
+            //var people = await requestManager.GetAll<Person>("people");
 
-            foreach (var person in people)
-            {
-                Console.WriteLine(person.Name);
-            }
+            //var personManager = new PersonManager();
+
+            //personManager.SaveMany(people);
+
+            //foreach (var person in personManager.GetAll())
+            //{
+            //    Console.WriteLine(person.Name);
+            //}
+
+            var person = new PersonManager(new SettingsManager()).GetAll().First();
+
+            Console.WriteLine(person.Name);
         }
     }
 }

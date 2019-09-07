@@ -4,6 +4,8 @@ namespace SWAPI.Library.Models
 {
     public class Person : BaseModel
     {
+        public int PersonId { get; set; }
+
         [JsonProperty("name")]
         public string Name { get; set; }
 
@@ -31,16 +33,16 @@ namespace SWAPI.Library.Models
         [JsonProperty("homeworld")]
         public string Homeworld { get; set; }
 
-        [JsonProperty("films")]
-        public string[] Films { get; set; }
+        //[JsonProperty("films")]
+        //public string[] Films { get; set; }
 
-        [JsonProperty("species")]
-        public string[] Species { get; set; }
+        //[JsonProperty("species")]
+        //public string[] Species { get; set; }
 
-        [JsonProperty("starships")]
-        public string[] Starships { get; set; }
+        //[JsonProperty("starships")]
+        //public string[] Starships { get; set; }
 
-        [JsonProperty("vehicles")]
-        public string[] Vehicles { get; set; }
+        //[JsonProperty("vehicles")]
+        //public string[] Vehicles { get; set; }
     }
 }
