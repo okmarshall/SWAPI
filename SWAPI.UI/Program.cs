@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using SWAPI.Library.DataAccess;
 using SWAPI.Library.Models;
 using SWAPI.Library.Requests;
 using SWAPI.Library.Settings;
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace SWAPI.UI
 {
