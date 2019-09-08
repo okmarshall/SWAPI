@@ -11,7 +11,7 @@ namespace SWAPI.Library.Requests
 
         private HttpClient _httpClient;
 
-        public HttpClient HttpClient
+        private HttpClient HttpClient
         {
             get
             {
